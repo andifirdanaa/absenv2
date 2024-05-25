@@ -15,12 +15,8 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
-        <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 
         <!-- Styles -->
-        <style>
-           
-        </style>
 
         <style>
             body {
@@ -40,21 +36,7 @@
     </head>
     <body class="antialiased">
         <div class="wrapper-body">
-            {{-- <div class="card">
-                <div class="card-header" style="text-align: center;">
-                    <h1><b>Daftar Hadir</b></h1>
-                </div>
-                <div class="card-body">
-                    <form class="form-inline">
-                        <div class="form-group mx-sm-3 mb-2">
-                            <label for="inputPassword2" class="sr-only">Password</label>
-                            <input type="text" class="form-control" id="cari_id" placeholder="Cari nama...">
-                        </div>
-
-                        <button type="button" class="btn btn-primary mb-2">Cari</button>
-                    </form> 
-                </div>
-            </div> --}}
+           
 
             <div class="card mt-5">
                 <div class="card-body">
@@ -92,8 +74,6 @@
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script type="text/javascript">
 
@@ -104,7 +84,7 @@
                     "ordering": false,
                     "paging": true,
                     // "responsive" : true,
-                    "ajax": "{{ route('absen') }}",
+                    "ajax": "{{ route('absen.hadir') }}",
                     "pageLength": 10,
                     "columns": [
                         { "data": "nama", name: "nama", searchable: true },
@@ -120,43 +100,6 @@
                 table();
             });
 
-            $(document).on('click', '.btn-hadir', function() {
-                var data = $(this).data('id');
-
-                Swal.fire({
-                    title: "Do you want to save the changes?",
-                    showDenyButton: true,
-                    showCancelButton: true,
-                    confirmButtonText: "Save",
-                    denyButtonText: `Don't save`
-                }).then((result) => {
-                    /* Read more about isConfirmed, isDenied below */
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: '/absen/hadir/' + data,
-                            type: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            data: {
-                                data: data,
-                            },
-                            success: function(response) {
-                                // Handle response
-                                // console.log(response);
-                                Swal.fire("Data Berhasil terupdate!", "", "success");
-                                location.reload();
-                            },
-                            error: function(err){
-                                Swal.fire("Error, data tidak bisa diupdate", "", "error");
-                            }
-                        });
-                    } else if (result.isDenied) {
-                        Swal.fire("Data tidak terupdate", "", "info");
-                    }
-                });
-            
-            });
         </script>
     </body>
 </html>
